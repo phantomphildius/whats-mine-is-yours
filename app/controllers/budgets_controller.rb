@@ -12,6 +12,7 @@ class BudgetsController < ApplicationController
 
   def show
     @budget = current_user.budgets.find_by!(id: params[:id])
+    @new_budget_item = @budget.items.build
   end
 
   private
