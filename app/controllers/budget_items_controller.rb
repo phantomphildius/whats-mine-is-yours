@@ -1,11 +1,12 @@
 class BudgetItemsController < ApplicationController
   def create
-    budget = current_user.budgets.find_sole_by(id: params.fetch(:budget_id))    
+    @budget = current_user.budgets.find_sole_by(id: params.fetch(:budget_id))    
     item_creator = BudgetItemUpserterService.new(budget: @budget, item_params: budget_item_params)
   
     item_creator.upsert!
 
-    redirect_to budget
+    @budget_item = item_creator.budget_item
+    @new_budget_item = @budget.items.new
   end
 
   def edit

@@ -1,0 +1,4 @@
+<%= turbo_stream.replace "budget_total", partial: 'budgets/total', locals: { budget: @budget } %>
+<%= turbo_stream.append "budget_items", @budget_item %> 
+<%= turbo_stream.replace "budget_item_form", partial: 'new_form', locals: { budget_item: @new_budget_item } %>
+
