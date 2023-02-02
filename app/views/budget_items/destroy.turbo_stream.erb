@@ -1,0 +1,5 @@
+<%= turbo_stream.update "total_budget" do %>
+  <%= render "budgets/total", budget: @budget %>
+<% end %>
+
+<%= turbo_stream.remove @budget_item %>

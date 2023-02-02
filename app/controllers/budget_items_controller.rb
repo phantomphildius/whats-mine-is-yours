@@ -27,11 +27,9 @@ class BudgetItemsController < ApplicationController
   end
 
   def destroy
-    budget = current_user.budgets.find_sole_by(id: params.fetch(:budget_id))    
-
-    budget.items.find_sole_by(id: params.fetch(:id)).destroy!
-
-    redirect_to budget
+    @budget = current_user.budgets.find_sole_by(id: params.fetch(:budget_id))    
+    @budget_item = @budget.items.find_sole_by(id: params.fetch(:id))
+    @budget_item.destroy!
   end
 
   private
