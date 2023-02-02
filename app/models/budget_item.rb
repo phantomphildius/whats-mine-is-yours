@@ -8,6 +8,6 @@ class BudgetItem < ApplicationRecord
   scope :persisted, -> { where.not(id: nil) }
 
   def to_partial_path
-    '/budget_items/item'
+    'budget_items/item'
   end
 end

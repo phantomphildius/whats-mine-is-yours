@@ -11,7 +11,7 @@ class BudgetsController < ApplicationController
   end
 
   def show
-    @budget = current_user.budgets.find_by!(id: params[:id])
+    @budget = current_user.budgets.find_sole_by(id: params[:id])
     @new_budget_item = @budget.items.build
   end
 
