@@ -1,34 +1,23 @@
 <h2><%= @budget.title %></h2>
-<%
-=begin%>
-  Use stream.replace to update this number  
-<%
-=end%>
-<h3><%= humanized_money_with_symbol(@budget.total) %></h3>
 
-<% if @budget.items.any? %>
+<div id="budget_total">
+  <%= render 'total', budget: @budget %>
+</div>
+
+<%= link_to "back", statements_path %>
+
+<% if @budget.items.persisted.any? %>
 <table>
   <thead>
     <tr>
       <th>Category</th>
       <th>Amount</th>
+      <th>Actions</th>
     </tr>
   </thead>
-  <%
-=begin%>
- <turbo_stream action="append" target="budget_items">
-    <template> 
-<%
-=end%>
-      <tbody id="budget_items">
-        <%= render @budget.items.persisted %>
-      </tbody>
-    <%
-=begin%>
- </template>
-   </turbo_stream> 
-<%
-=end%>
+  <tbody id="budget_items">
+    <%= render @budget.items.persisted %>
+  </tbody>
 </table>
 <% else %>
   <div>Add a budget item</div>

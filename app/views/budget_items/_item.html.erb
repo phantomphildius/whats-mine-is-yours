@@ -5,4 +5,7 @@
   <td>
     <%= humanized_money_with_symbol(item.amount) %>
   </td>
+  <td>
+    <%= button_to 'X', budget_item_path(item.budget, item), method: :delete %>
+  </td>
 </tr>
