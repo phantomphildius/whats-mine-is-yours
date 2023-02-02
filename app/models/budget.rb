@@ -4,6 +4,6 @@ class Budget < ApplicationRecord
   has_many :statements
 
   def total
-    items.sum(:amount_cents) / 100
+    Money.new(items.sum(:amount_cents))
   end
 end
