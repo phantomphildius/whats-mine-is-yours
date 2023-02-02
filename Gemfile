@@ -37,7 +37,7 @@ gem "bootsnap", require: false
 gem 'devise'
 gem 'simple_form'
 gem 'money-rails'
-
+gem 'normalize_attributes'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

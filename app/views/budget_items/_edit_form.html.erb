@@ -1,0 +1,5 @@
+<%= simple_form_for @budget_item , url: budget_item_path(@budget_item.budget, @budget_item), method: :put do |f| %>
+  <%= f.input :category %>
+  <%= f.input :amount, as: :integer %>
+  <%= f.button :submit %>
+<% end %>

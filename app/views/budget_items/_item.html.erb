@@ -1,11 +1,15 @@
-<tr>
-  <td>
-    <%= item.category %>
-  </td>
-  <td>
-    <%= humanized_money_with_symbol(item.amount) %>
-  </td>
-  <td>
-    <%= button_to 'X', budget_item_path(item.budget, item), method: :delete %>
-  </td>
-</tr>
+<%= turbo_frame_tag item do %>
+  <div>
+    <span>
+      <%= item.category %>
+    </span>
+    <span>
+      <%= humanized_money_with_symbol(item.amount) %>
+    </span>
+    <span>
+      <%= button_to 'X', budget_item_path(item.budget, item), method: :delete %>
+      |
+      <%= link_to "edit", edit_budget_item_path(item.budget, item) %>
+    </span>
+  </div>
+<% end %>

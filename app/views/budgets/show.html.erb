@@ -6,20 +6,12 @@
 
 <%= link_to "back", statements_path %>
 
+<%= render 'budget_items/new_form', budget_item: @new_budget_item %>
+
 <% if @budget.items.persisted.any? %>
-<table>
-  <thead>
-    <tr>
-      <th>Category</th>
-      <th>Amount</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody id="budget_items">
-    <%= render @budget.items.persisted %>
-  </tbody>
-</table>
+  <% @budget.items.persisted.each do |item| %>
+  <%= render 'budget_items/item', item: item %>
+  <% end %>
 <% else %>
   <div>Add a budget item</div>
 <% end %>
-<%= render 'budget_items/form', budget_item: @new_budget_item %>

@@ -1,4 +1,8 @@
 class BudgetItem < ApplicationRecord
+  normalize :category, with: :downcase do |value|
+    value.squish
+  end
+
   belongs_to :budget
 
   monetize :amount_cents
