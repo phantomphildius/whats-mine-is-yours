@@ -14,17 +14,15 @@ class BudgetItemsController < ApplicationController
   end
 
   def update
-    budget = current_user.budgets.find_sole_by(id: params.fetch(:budget_id))    
-    item_for_update = budget.items.find_sole_by(id: params.fetch(:id))
+    @budget = current_user.budgets.find_sole_by(id: params.fetch(:budget_id))    
+    @item_for_update = @budget.items.find_sole_by(id: params.fetch(:id))
 
     item_editor = BudgetItemEditorService.new(
-      budget_item: item_for_update, 
+      budget_item: @item_for_update, 
       item_params: budget_item_params,
     )
   
     item_editor.update
-
-    redirect_to budget
   end
 
   def destroy
