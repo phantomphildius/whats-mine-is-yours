@@ -1,0 +1,4 @@
+<%= turbo_stream.append "statements", @statement %> 
+<%= turbo_stream.replace 'new_statement' do %>
+  <%= render "new_statement_button" %>
+<% end %>

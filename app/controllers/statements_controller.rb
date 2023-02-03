@@ -11,14 +11,14 @@ class StatementsController < ApplicationController
   def create
     importer = StatementImporterService.new(
       budget: current_budget,
-      institution: create_params.fetch(:institution),
+      institution_name: create_params.fetch(:institution),
       time_period: create_params.fetch(:time_period),
       statement_file: create_params.fetch(:statement_file),
     )
 
     importer.import
 
-    redirect_to statements_path
+    @statement = importer.statement
   end
 
   private

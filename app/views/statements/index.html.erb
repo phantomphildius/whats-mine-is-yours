@@ -6,9 +6,9 @@
 <% end %>
 
 <%= turbo_frame_tag 'new_statement' do %>
-  <%= button_to new_statement_path, method: :get do %>
-    <i class="bi bi-pencil-fill"></i> New statement
-  <% end %>
+  <%= render "new_statement_button" %>
 <% end %>
 
-<%= render @statements %>
+<section id="statements">
+  <%= render @statements %>
+</section>

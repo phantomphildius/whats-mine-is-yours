@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_29_172045) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_03_214916) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "budget_items", force: :cascade do |t|
     t.bigint "budget_id", null: false
-    t.string "category"
-    t.integer "amount_cents"
+    t.string "category", null: false
+    t.integer "amount_cents", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["budget_id"], name: "index_budget_items_on_budget_id"
@@ -40,12 +40,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_29_172045) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "institutions", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "statement_transactions", force: :cascade do |t|
     t.bigint "statement_id", null: false
-    t.date "date"
-    t.integer "amount_cents"
-    t.string "merchant"
-    t.string "category"
+    t.date "date", null: false
+    t.integer "amount_cents", null: false
+    t.string "merchant", null: false
+    t.string "category", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category"], name: "index_statement_transactions_on_category"
@@ -56,12 +62,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_29_172045) do
 
   create_table "statements", force: :cascade do |t|
     t.bigint "budget_id", null: false
-    t.date "time_period"
-    t.string "institution"
+    t.date "time_period", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "institution_id"
     t.index ["budget_id"], name: "index_statements_on_budget_id"
-    t.index ["institution"], name: "index_statements_on_institution"
+    t.index ["institution_id"], name: "index_statements_on_institution_id"
     t.index ["time_period"], name: "index_statements_on_time_period"
   end
 

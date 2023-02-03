@@ -2,7 +2,7 @@
   <%= statement.time_period %>
 </div>
 <div>
-  <%= statement.institution %>
+  <%= statement.institution_name.humanize %>
 </div>
 <div>
   <%= humanized_money_with_symbol(statement.total) %>

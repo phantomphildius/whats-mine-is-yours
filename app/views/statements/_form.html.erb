@@ -1,5 +1,5 @@
 <%= simple_form_for @statement, url: statements_path do |f| %>
-  <%= f.input :time_period, placeholder: 'mm/yyyy' %>
+  <%= f.input :time_period, as: :string, placeholder: 'mm/yyyy' %>
   <%= f.input :institution %>
 
   <%= simple_fields_for :statement_file do |file| %>
