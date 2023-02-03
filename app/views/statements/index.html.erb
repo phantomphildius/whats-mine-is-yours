@@ -1,2 +1,14 @@
 <h1>statements</h2> 
-<%= link_to "Budget", @current_budget %>
+<% if @current_budget.present? %>
+  <%= link_to "Budget", @current_budget %>
+<% else %>
+  <%= link_to "Create a Budget", new_budget_path %>
+<% end %>
+
+<%= turbo_frame_tag 'new_statement' do %>
+  <%= button_to new_statement_path, method: :get do %>
+    <i class="bi bi-pencil-fill"></i> New statement
+  <% end %>
+<% end %>
+
+<%= render @statements %>

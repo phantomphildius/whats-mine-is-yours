@@ -1,0 +1,10 @@
+<%= simple_form_for @statement, url: statements_path do |f| %>
+  <%= f.input :time_period, placeholder: 'mm/yyyy' %>
+  <%= f.input :institution %>
+
+  <%= simple_fields_for :statement_file do |file| %>
+    <%= f.input :statement_file, as: :file, hint: 'Must be csv' %>
+  <% end %>
+
+  <%= f.button :submit %>
+<% end %>

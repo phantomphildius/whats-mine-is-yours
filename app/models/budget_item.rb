@@ -5,7 +5,7 @@ class BudgetItem < ApplicationRecord
 
   belongs_to :budget
 
-  monetize :amount_cents
+  monetize :amount_cents, numericality: { greater_than_or_equal_to: 0 }
 
   validates :category, uniqueness: { scope: :budget_id }
 
