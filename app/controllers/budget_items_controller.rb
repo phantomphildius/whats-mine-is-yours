@@ -1,11 +1,7 @@
 class BudgetItemsController < ApplicationController
   def create
     @budget = current_user.budgets.find_sole_by(id: params.fetch(:budget_id))    
-    item_creator = BudgetItemUpserterService.new(budget: @budget, item_params: budget_item_params)
-  
-    item_creator.upsert!
-
-    @budget_item = item_creator.budget_item
+    @budget_item = @budget.items.create(budget_item_params)
     @new_budget_item = @budget.items.new
   end
 
@@ -18,12 +14,9 @@ class BudgetItemsController < ApplicationController
     @budget = current_user.budgets.find_sole_by(id: params.fetch(:budget_id))    
     @item_for_update = @budget.items.find_sole_by(id: params.fetch(:id))
 
-    item_editor = BudgetItemEditorService.new(
-      budget_item: @item_for_update, 
-      item_params: budget_item_params,
-    )
-  
-    item_editor.update
+    unless @item_for_update.update(budget_item_params)
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -35,6 +28,8 @@ class BudgetItemsController < ApplicationController
   private
 
   def budget_item_params
-    params.require(:budget_item).permit(:category, :amount)
+    params.require(:budget_item).permit(:category, :amount).tap do |item|
+      item[:amount] = item[:amount].to_money
+    end
   end
 end

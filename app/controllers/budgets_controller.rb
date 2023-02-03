@@ -5,7 +5,10 @@ class BudgetsController < ApplicationController
 
   def create
     budget_creator = BudgetCreatorService.new(title: budget_params[:title], user: current_user)
+
     budget_creator.create
+
+    redirect_to @budget
   end
 
   def show
