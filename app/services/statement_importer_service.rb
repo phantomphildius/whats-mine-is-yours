@@ -13,6 +13,7 @@ class StatementImporterService
       institution.save!
       statement.save!
       ingest_statement_rows
+      StatementCategorizerJob.perform_later(statement)
     end
   end
 

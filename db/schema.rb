@@ -10,9 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_03_214916) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_03_235958) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "budget_item_tags", force: :cascade do |t|
+    t.bigint "budget_item_id", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["budget_item_id"], name: "index_budget_item_tags_on_budget_item_id"
+  end
+
+  create_table "budget_item_transactions", force: :cascade do |t|
+    t.bigint "budget_item_id", null: false
+    t.bigint "statement_transaction_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["budget_item_id"], name: "index_budget_item_transactions_on_budget_item_id"
+    t.index ["statement_transaction_id"], name: "index_budget_item_transactions_on_statement_transaction_id"
+  end
 
   create_table "budget_items", force: :cascade do |t|
     t.bigint "budget_id", null: false
@@ -83,6 +100,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_214916) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "budget_item_tags", "budget_items"
+  add_foreign_key "budget_item_transactions", "budget_items"
+  add_foreign_key "budget_item_transactions", "statement_transactions"
   add_foreign_key "budget_items", "budgets"
   add_foreign_key "budget_memberships", "budgets"
   add_foreign_key "budget_memberships", "users"
