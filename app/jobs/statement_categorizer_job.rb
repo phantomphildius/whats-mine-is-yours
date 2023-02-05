@@ -2,8 +2,9 @@ class StatementCategorizerJob < ApplicationJob
   def perform(statement)
     budget = statement.budget 
     statement.transactions.find_each do |transaction|
-      StatementCategorizerService.new(
+      TransactionCategorizerService.new(
         budget: budget, 
+        statement: statement,
         statement_transaction: transaction,
       ).categorize
     end

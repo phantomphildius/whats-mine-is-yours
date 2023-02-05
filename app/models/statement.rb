@@ -2,6 +2,8 @@ class Statement < ApplicationRecord
   belongs_to :budget
   belongs_to :institution
 
+  has_many :budget_items, class_name: 'StatementBudgetItem', dependent: :destroy
+
   accepts_nested_attributes_for :institution, reject_if: :all_blank
 
   has_many :transactions, class_name: 'StatementTransaction', dependent: :destroy

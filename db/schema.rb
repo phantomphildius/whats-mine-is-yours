@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_03_235958) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_04_174617) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,15 +20,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_235958) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["budget_item_id"], name: "index_budget_item_tags_on_budget_item_id"
-  end
-
-  create_table "budget_item_transactions", force: :cascade do |t|
-    t.bigint "budget_item_id", null: false
-    t.bigint "statement_transaction_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["budget_item_id"], name: "index_budget_item_transactions_on_budget_item_id"
-    t.index ["statement_transaction_id"], name: "index_budget_item_transactions_on_statement_transaction_id"
   end
 
   create_table "budget_items", force: :cascade do |t|
@@ -63,6 +54,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_235958) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "statement_budget_items", force: :cascade do |t|
+    t.bigint "budget_item_id", null: false
+    t.bigint "statement_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["budget_item_id"], name: "index_statement_budget_items_on_budget_item_id"
+    t.index ["statement_id"], name: "index_statement_budget_items_on_statement_id"
+  end
+
   create_table "statement_transactions", force: :cascade do |t|
     t.bigint "statement_id", null: false
     t.date "date", null: false
@@ -71,9 +71,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_235958) do
     t.string "category", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "statement_budget_item_id"
     t.index ["category"], name: "index_statement_transactions_on_category"
     t.index ["date"], name: "index_statement_transactions_on_date"
     t.index ["merchant"], name: "index_statement_transactions_on_merchant"
+    t.index ["statement_budget_item_id"], name: "index_statement_transactions_on_statement_budget_item_id"
     t.index ["statement_id"], name: "index_statement_transactions_on_statement_id"
   end
 
@@ -101,11 +103,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_235958) do
   end
 
   add_foreign_key "budget_item_tags", "budget_items"
-  add_foreign_key "budget_item_transactions", "budget_items"
-  add_foreign_key "budget_item_transactions", "statement_transactions"
   add_foreign_key "budget_items", "budgets"
   add_foreign_key "budget_memberships", "budgets"
   add_foreign_key "budget_memberships", "users"
+  add_foreign_key "statement_budget_items", "budget_items"
+  add_foreign_key "statement_budget_items", "statements"
+  add_foreign_key "statement_transactions", "statement_budget_items"
   add_foreign_key "statement_transactions", "statements"
   add_foreign_key "statements", "budgets"
 end

@@ -5,7 +5,7 @@ class BudgetItem < ApplicationRecord
 
   belongs_to :budget
   has_many :tags, class_name: 'BudgetItemTag', dependent: :destroy
-  has_many :budget_item_transactions, dependent: :destroy
+  has_many :statement_budget_items, dependent: :destroy
   has_many :transactions, through: :budget_item_transactions, class_name: 'StatementTransactions'
 
   monetize :amount_cents, numericality: { greater_than_or_equal_to: 0 }
