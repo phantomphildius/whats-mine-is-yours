@@ -1,0 +1,2 @@
+<%= turbo_stream.append "budget_item_#{@budget_item.id}_tags", @tag %>
+<%= turbo_stream.replace "#{@budget_item.id}_new_tag", partial: 'budget_items/new_tag_link', locals: { item: @budget_item } %>

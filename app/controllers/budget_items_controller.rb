@@ -1,8 +1,13 @@
 class BudgetItemsController < ApplicationController
   def create
     @budget = current_user.budgets.find_sole_by(id: params.fetch(:budget_id))    
-    @budget_item = @budget.items.create(budget_item_params)
-    @new_budget_item = @budget.items.new
+    @budget_item = @budget.items.new(budget_item_params)
+    if @budget_item.save
+      @new_budget_item = @budget.items.new
+    else
+      flash[:error] = "could not create budget #{@budget.errors}"
+      redirect_to @budget
+    end
   end
 
   def edit

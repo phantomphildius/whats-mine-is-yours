@@ -12,4 +12,11 @@
       <%= link_to "edit", edit_budget_item_path(item.budget, item) %>
     </span>
   </div>
+  <div>
+    <div id="budget_item_<%= item.id %>_tags">
+      <%= render item.tags %>
+    </div>
+
+    <%= render "budget_items/new_tag_link", item: item %>
+  </div>
 <% end %>
