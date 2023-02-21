@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_04_174617) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_20_122451) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +54,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_04_174617) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "monthly_statements", force: :cascade do |t|
+    t.date "time_period", null: false
+    t.bigint "budget_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["budget_id"], name: "index_monthly_statements_on_budget_id"
+    t.index ["time_period"], name: "index_monthly_statements_on_time_period"
+  end
+
   create_table "statement_budget_items", force: :cascade do |t|
     t.bigint "budget_item_id", null: false
     t.bigint "statement_id", null: false
@@ -80,13 +89,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_04_174617) do
   end
 
   create_table "statements", force: :cascade do |t|
-    t.bigint "budget_id", null: false
     t.date "time_period", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "institution_id"
-    t.index ["budget_id"], name: "index_statements_on_budget_id"
+    t.bigint "monthly_statement_id", null: false
     t.index ["institution_id"], name: "index_statements_on_institution_id"
+    t.index ["monthly_statement_id"], name: "index_statements_on_monthly_statement_id"
     t.index ["time_period"], name: "index_statements_on_time_period"
   end
 
@@ -106,9 +115,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_04_174617) do
   add_foreign_key "budget_items", "budgets"
   add_foreign_key "budget_memberships", "budgets"
   add_foreign_key "budget_memberships", "users"
+  add_foreign_key "monthly_statements", "budgets"
   add_foreign_key "statement_budget_items", "budget_items"
   add_foreign_key "statement_budget_items", "statements"
   add_foreign_key "statement_transactions", "statement_budget_items"
   add_foreign_key "statement_transactions", "statements"
-  add_foreign_key "statements", "budgets"
+  add_foreign_key "statements", "monthly_statements"
 end

@@ -1,4 +1,12 @@
-<%= turbo_stream.append "statements", @statement %> 
+<% if @monthly_statement.statements.one? %>
+  <%= turbo_stream.append "statements",
+      partial: 'statements/monthly_statement',
+      locals: { monthly_statement: @monthly_statement.to_display }  %>
+<% else %>
+  <%= turbo_stream.replace "monthly_statement_#{@monthly_statement.to_param}" do %>
+    <%= render "statements/monthly_statement", monthly_statement: @monthly_statement.to_display %>
+  <% end %>
+<% end %>
 <%= turbo_stream.replace 'new_statement' do %>
   <%= render "new_statement_button" %>
 <% end %>

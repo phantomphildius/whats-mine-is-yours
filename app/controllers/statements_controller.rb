@@ -1,7 +1,7 @@
 class StatementsController < ApplicationController
   def index
     @current_budget = current_budget
-    @statements = @current_budget.statements
+    @monthly_statements = @current_budget.monthly_statements.map { |ms| MonthlyStatementPresenter.new(ms) }
   end
 
   def new
@@ -18,7 +18,7 @@ class StatementsController < ApplicationController
 
     importer.import
 
-    @statement = importer.statement
+    @monthly_statement = importer.monthly_statement
   end
 
   private

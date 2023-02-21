@@ -1,0 +1,24 @@
+<%= turbo_frame_tag "monthly_statement_#{monthly_statement.to_param}" do %>
+  <div>
+    <%= monthly_statement.time_period.strftime('%m/%Y') %>
+  </div>
+  <div>
+    <%= monthly_statement.number_of_statements %>
+    <span>
+      <%= monthly_statement.institution_names %>
+    </span>
+  </div>
+  <div>
+    <%= humanized_money_with_symbol(monthly_statement.total) %>
+  </div>
+  <div>
+    <% if monthly_statement.met_budget? %>
+      <i class="bi bi-check-circle-fill"></i>
+    <% else %>
+      <i class="bi bi-x-circle-fill"></i>
+    <% end %>
+  </div>
+  <div>
+    <%= link_to "statement >", monthly_statement_path(id: monthly_statement.to_param) %>
+  </div>
+<% end %>
