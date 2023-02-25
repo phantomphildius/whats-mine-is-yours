@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     end
   end
   resources :statements, except: %i(destroy edit)
+  resources :monthly_statements, only: :show
 
   root to: 'statements#index'
 end

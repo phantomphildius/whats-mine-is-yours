@@ -1,4 +1,6 @@
 class MonthlyStatementPresenter
+  delegate :time_period, :met_budget?, :total, to: :monthly_statement
+
   def initialize(monthly_statement)
     @monthly_statement = monthly_statement
   end
@@ -27,5 +29,5 @@ class MonthlyStatementPresenter
 
   attr_reader :monthly_statement
 
-  delegate :statements, :time_period, :met_budget?, :total, to: :monthly_statement
+  delegate :statements, to: :monthly_statement
 end
