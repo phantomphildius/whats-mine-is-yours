@@ -5,6 +5,13 @@
   <%= pie_chart @monthly_statement.categorized_totals %>
 </section>
 
+<%= simple_form_for :statement_transaction_search, url: statement_transaction_searches_path do |f| %>
+  <%= f.hidden_field :monthly_statement_id, value: @monthly_statement.id %>
+  <%= f.submit 'Search' %>
+<% end %>
+
 <section>
-  <%= render @monthly_statement.statements %>
+  <%= turbo_frame_tag 'statement_transaction_list' do%>
+    <%= render "statement_transaction_list", transactions: @monthly_statement.transactions %>
+  <% end %>
 </section>
