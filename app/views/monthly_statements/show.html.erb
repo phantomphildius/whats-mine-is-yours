@@ -2,6 +2,7 @@
 
 <section class=<%= @monthly_statement.met_budget? ? "text-success" : "text-danger" %>>
   <div><%= @monthly_statement.total %> / <%= @monthly_statement.budget.total %></div>
+  <%= pie_chart @monthly_statement.categorized_totals %>
 </section>
 
 <section>

@@ -2,8 +2,17 @@ class MonthlyStatement < ApplicationRecord
   belongs_to :budget
   has_many :statements
 
+  has_many :transactions, through: :statements
+
   def total
     Money.new(statements.joins(:transactions).sum('statement_transactions.amount_cents'))
+  end
+
+  def categorized_totals
+    transactions
+      .group(:statement_budget_item_id)
+      .sum(:amount_cents)
+      .transform_keys { |key| StatementBudgetItem.category_for_transaction(key) }
   end
 
   def met_budget?

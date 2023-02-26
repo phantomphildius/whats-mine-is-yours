@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   has_many :budget_memberships
   has_many :budgets, through: :budget_memberships
+  has_many :monthly_statements, through: :budgets
 
   def current_budget
     budgets.last

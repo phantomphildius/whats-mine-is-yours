@@ -16,8 +16,4 @@ class Statement < ApplicationRecord
   def total
     Money.new(transactions.sum(:amount_cents))
   end
-
-  def to_partial_path
-    'monthly_statements/statement'
-  end
 end
