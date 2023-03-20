@@ -2,6 +2,7 @@ class BudgetItemsController < ApplicationController
   def create
     @budget = current_user.budgets.find_sole_by(id: params.fetch(:budget_id))    
     @budget_item = @budget.items.new(budget_item_params)
+    # TODO: create statement budget items for old statements
     if @budget_item.save
       @new_budget_item = @budget.items.new
     else

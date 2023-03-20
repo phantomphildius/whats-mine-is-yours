@@ -1,1 +1,5 @@
-<ul><%= render transactions %></ul>
+<ul>
+  <%= render partial: 'transaction',
+    collection: monthly_statement.transactions,
+    locals: { statement: monthly_statement } %>
+</ul>

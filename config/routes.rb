@@ -7,8 +7,11 @@ Rails.application.routes.draw do
     end
   end
   resources :statements, except: %i(destroy edit)
+  # TODO: move under statements
   resources :statement_transaction_searches, only: :create
-  resources :monthly_statements, only: :show
+  resources :monthly_statements, only: :show do
+    resources :transaction_categorizations, only: :create, controller: 'transaction_categorizations'
+  end
 
   root to: 'statements#index'
 end

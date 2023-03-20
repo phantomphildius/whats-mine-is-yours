@@ -1,0 +1,4 @@
+<%= turbo_stream.replace @transaction, @transaction %>
+<%= turbo_stream.update 'monthly_statement_charts' do %>
+  <%= render "monthly_statements/charts", monthly_statement: @monthly_statement %>
+<% end %>

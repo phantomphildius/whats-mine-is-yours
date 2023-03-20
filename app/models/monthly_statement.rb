@@ -10,9 +10,10 @@ class MonthlyStatement < ApplicationRecord
 
   def categorized_totals
     transactions
-      .group(:statement_budget_item_id)
+      .left_joins(:statement_budget_item)
+      .group('statement_budget_items.budget_item_id')
       .sum(:amount_cents)
-      .transform_keys { |key| StatementBudgetItem.category_for_transaction(key) }
+      .transform_keys { |key| BudgetItem.find_by(id: key)&.category || 'Uncategorized' }
   end
 
   def met_budget?

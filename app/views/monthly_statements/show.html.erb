@@ -1,8 +1,10 @@
-<h1> Statement for <%= @monthly_statement.time_period %></h1?>
+<h1> Statement for <%= @monthly_statement.time_period %></h1>
 
 <section class=<%= @monthly_statement.met_budget? ? "text-success" : "text-danger" %>>
   <div><%= @monthly_statement.total %> / <%= @monthly_statement.budget.total %></div>
-  <%= pie_chart @monthly_statement.categorized_totals %>
+  <div id="monthly_statement_charts">
+    <%= render "charts", monthly_statement: @monthly_statement %>
+  </div>
 </section>
 
 <%= simple_form_for :statement_transaction_search, url: statement_transaction_searches_path do |f| %>
@@ -12,6 +14,6 @@
 
 <section>
   <%= turbo_frame_tag 'statement_transaction_list' do%>
-    <%= render "statement_transaction_list", transactions: @monthly_statement.transactions %>
+    <%= render "statement_transaction_list", monthly_statement: @monthly_statement %>
   <% end %>
 </section>

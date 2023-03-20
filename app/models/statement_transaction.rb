@@ -11,18 +11,11 @@ class StatementTransaction < ApplicationRecord
   validates :amount_cents, :date, :category, :merchant, presence: true
 
   delegate :institution_name, to: :statement
+  delegate :budget_item_category, to: :statement_budget_item, allow_nil: true
 
   def to_partial_path
     'monthly_statements/transaction'
   end
-
-  def safe_budget_item_category
-    uncategorized? ? 'Uncategorized' : budget_item_category
-  end
-
-  private
-
-  delegate :budget_item_category, to: :statement_budget_item, allow_nil: true
 
   def uncategorized?
     statement_budget_item.nil?

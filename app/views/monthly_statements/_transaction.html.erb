@@ -1,21 +1,37 @@
-<li>
-  <div class="top-level">
-    <div>
-      <%= transaction.merchant %>
+<%= turbo_frame_tag transaction do %>
+  <li>
+    <div class="top-level">
+      <div>
+        <%= transaction.merchant %>
+      </div>
+      <div>
+        <%= transaction.date %>
+      </div>
+      <div>
+        <%= transaction.amount %>
+      </div>
     </div>
-    <div>
-      <%= transaction.date %>
+    <div class="bottom-level">
+      <div>
+        <%= transaction.institution_name %>
+      </div>
+      <div>
+        <% if transaction.uncategorized? %>
+          <%= simple_form_for :transaction_categorization,
+              url: monthly_statement_transaction_categorizations_path(statement),
+              method: :post,
+              data: { controller: "form", action: "input->form#submit" } do |f| %>
+            <%= f.hidden_field :transaction_id, value: transaction.id %>
+            <%= f.input :budget_item_id,
+                collection: statement_budget_item_categories_for(statement),
+                required: false,
+                label: false,
+                prompt: 'Categorize this transaction' %>
+          <% end %>
+        <% else %>
+          <%= transaction.budget_item_category %>
+        <% end %>
+      </div>
     </div>
-    <div>
-      <%= transaction.amount %>
-    </div>
-  </div>
-  <div classs="bottom-level">
-    <div>
-      <%= transaction.institution_name %>
-    </div>
-    <div>
-      <%= transaction.safe_budget_item_category %>
-    </div>
-  </div>
-</li>
+  </li>
+<% end %>

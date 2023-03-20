@@ -1,4 +1,4 @@
-modile StatementTransactionSearch
+module StatementTransactionSearch
   class Params
     def initialize(params)
       @params = params
