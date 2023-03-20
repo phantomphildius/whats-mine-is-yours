@@ -8,12 +8,21 @@ class MonthlyStatement < ApplicationRecord
     Money.new(statements.joins(:transactions).sum('statement_transactions.amount_cents'))
   end
 
+  # move this to a helper or presenter
+
   def categorized_totals
-    transactions
-      .left_joins(:statement_budget_item)
-      .group('statement_budget_items.budget_item_id')
-      .sum(:amount_cents)
-      .transform_keys { |key| BudgetItem.find_by(id: key)&.category || 'Uncategorized' }
+    _categorized_totals.each_with_object({}) do |(key, value), obj|
+      new_name = BudgetItem.find_by(id: key)&.category || 'Uncategorized'
+      obj[new_name] = value / 100
+    end
+  end
+
+  def monthly_budget_utlization_by_category
+    # binding.pry
+    _categorized_totals.except(nil).each_with_object({}) do |(key, value), obj|
+      budget_item = BudgetItem.find_by(id: key)
+      obj[budget_item.category] = (value.to_d / budget_item.amount_cents.to_d) * 100
+    end
   end
 
   def met_budget?
@@ -26,5 +35,14 @@ class MonthlyStatement < ApplicationRecord
 
   def to_display
     MonthlyStatementPresenter.new(self)
+  end
+
+  private
+
+  def _categorized_totals
+    @_categorized_totals ||= transactions
+      .left_joins(:statement_budget_item)
+      .group('statement_budget_items.budget_item_id')
+      .sum(:amount_cents)
   end
 end

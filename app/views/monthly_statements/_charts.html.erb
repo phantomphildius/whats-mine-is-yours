@@ -1,1 +1,3 @@
-<%= pie_chart monthly_statement.categorized_totals %>
+<%= pie_chart monthly_statement.categorized_totals, prefix: '$' %>
+
+<%= bar_chart monthly_statement.monthly_budget_utlization_by_category, suffix: '%', precision: 3 %>
