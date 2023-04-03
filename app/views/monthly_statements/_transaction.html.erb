@@ -1,21 +1,21 @@
 <%= turbo_frame_tag transaction do %>
-  <li>
-    <div class="top-level">
-      <div>
+  <li class="row border-bottom border-secondary-subtle py-2">
+    <div class="row">
+      <div class="col">
         <%= transaction.merchant %>
       </div>
-      <div>
+      <div class="col">
         <%= transaction.date %>
       </div>
-      <div>
-        <%= transaction.amount %>
+      <div class="col">
+        <%= transaction.amount.format %>
       </div>
     </div>
-    <div class="bottom-level">
-      <div>
+    <div class="row">
+      <div class="col">
         <%= transaction.institution_name %>
       </div>
-      <div>
+      <div class="col">
         <% if transaction.uncategorized? %>
           <%= simple_form_for :transaction_categorization,
               url: monthly_statement_transaction_categorizations_path(statement),

@@ -1,14 +1,22 @@
-<h1>statements</h2> 
+<nav class="nav">
 <% if @current_budget.present? %>
-  <%= link_to "Budget", @current_budget %>
+  <li class="nav-item">
+    <%= link_to "Budget", @current_budget, class: 'nav-link' %>
+  </li>
 <% else %>
-  <%= link_to "Create a Budget", new_budget_path %>
+  <li class="nav-item">
+    <%= link_to "Create a Budget", new_budget_path, class: 'nav-link' %>
+  </li>
 <% end %>
+</nav>
 
-<%= turbo_frame_tag 'new_statement' do %>
-  <%= render "new_statement_button" %>
-<% end %>
+<h1>monthly statements</h1>
 
-<section id="statements">
+<section class="row gy-4 mt-4" id="statements">
+  <div class="row border-bottom border-secondary-subtle py-2">
+    <%= turbo_frame_tag 'new_statement' do %>
+      <%= render "new_statement_button" %>
+    <% end %>
+  </div>
   <%= render @monthly_statements %>
 </section>

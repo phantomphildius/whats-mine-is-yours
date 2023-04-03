@@ -1,5 +1,7 @@
-<ul>
-  <%= render partial: 'transaction',
-    collection: monthly_statement.transactions,
-    locals: { statement: monthly_statement } %>
-</ul>
+<section class="row card">
+  <ul class="row gy-2">
+    <%= render partial: 'transaction',
+      collection: monthly_statement.transactions,
+      locals: { statement: monthly_statement } %>
+  </ul>
+</section>

@@ -1,7 +1,11 @@
-<h1> Statement for <%= @monthly_statement.time_period %></h1>
+<section>
+  <h1> Statement for <%= @monthly_statement.time_period %></h1>
+  <div class=<%= @monthly_statement.met_budget? ? "text-success" : "text-danger" %>>
+    <h3><%= @monthly_statement.total.format %></h3>
+  </div>
+</section>
 
-<section class=<%= @monthly_statement.met_budget? ? "text-success" : "text-danger" %>>
-  <div><%= @monthly_statement.total %> / <%= @monthly_statement.budget.total %></div>
+<section>
   <div id="monthly_statement_charts">
     <%= render "charts", monthly_statement: @monthly_statement %>
   </div>
