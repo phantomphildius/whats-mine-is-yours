@@ -1,3 +1,15 @@
-<%= pie_chart monthly_statement.categorized_totals, prefix: '$' %>
-
-<%= bar_chart monthly_statement.monthly_budget_utlization_by_category, suffix: '%', precision: 3 %>
+<section class="row">
+  <div class="row">
+    <div class="col">
+      <%= area_chart monthly_statement.daily_spend_over_a_month, prefix: '$' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= pie_chart monthly_statement.categorized_totals, prefix: '$' %>
+    </div>
+    <div class="col">
+      <%= bar_chart monthly_statement.monthly_budget_utlization_by_category, suffix: '%', precision: 3 %>
+    </div>
+  </div>
+<section>
