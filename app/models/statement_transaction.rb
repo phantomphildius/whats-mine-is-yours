@@ -6,6 +6,8 @@ class StatementTransaction < ApplicationRecord
   belongs_to :statement
   belongs_to :statement_budget_item, optional: true
 
+  scope :uncategorized, -> { where(statement_budget_item_id: nil) }
+
   monetize :amount_cents
 
   validates :amount_cents, :date, :category, :merchant, presence: true
@@ -14,7 +16,7 @@ class StatementTransaction < ApplicationRecord
   delegate :budget_item_category, to: :statement_budget_item, allow_nil: true
 
   def to_partial_path
-    'monthly_statements/transaction'
+    "monthly_statements/transaction"
   end
 
   def uncategorized?
