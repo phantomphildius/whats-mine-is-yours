@@ -2,11 +2,11 @@
   <div class="card shadow-sm my-3 ps-3 py-3">
     <div class="row">
         <div class="col-5">
-          <h5>Category</h5>
+          <h6 class="text-muted">Category</h6>
           <p class="lead col-5"><%= item.category.capitalize %></p>
         </div>
         <div class="col-5">
-          <h5>Amount</h5>
+          <h6 class="text-muted">Amount</h6>
           <p class="lead col-5"><%= humanized_money_with_symbol(item.amount) %></p>
         </div>
         <div class="col-2 row">
@@ -20,7 +20,7 @@
     </div>
     <div>
       <div id="budget_item_<%= item.id %>_tags">
-        <h5>Tags</h5>
+        <h6 class="text-muted">Tags</h6>
         <%= render item.tags %>
         <%= render "budget_items/new_tag_link", item: item %>
       </div>

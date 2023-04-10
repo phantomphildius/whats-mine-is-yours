@@ -5,20 +5,12 @@ class MonthlyStatementPresenter
     @monthly_statement = monthly_statement
   end
 
-  def number_of_statements
-    statement_size = statements.count
-    statement_size.to_s + ' statement'.pluralize(statement_size)
-  end
-  
   def institution_names
-    statements.joins(:institution)
-      .pluck('institutions.name')
-      .map(&:humanize)
-      .join(', ')
+    statements.joins(:institution).pluck("institutions.name").map(&:humanize)
   end
 
   def to_partial_path
-    'statements/monthly_statement'
+    "statements/monthly_statement"
   end
 
   def to_param

@@ -1,5 +1,7 @@
 <%= turbo_frame_tag 'new_statement' do %>
-  <h2>New statement</h2>
+  <div class="justify-self-end text-end">
+    <%= link_to '', statements_path, class: 'btn-close' %>
+  </div>
+  <h3>Add statement</h3>
   <%= render "form" %>
 <% end %>
-<%= link_to "Cancel", statements_path %>

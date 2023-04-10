@@ -11,11 +11,11 @@
     <div class="row">
       <div class="col-4 small text-center">
         <div class="row justify-items-start">
+          <% unless transaction.uncategorized? %>
+            <p class="col-4 border-end"><%= transaction.budget_item_category %></p>
+          <% end %>
           <p class="col-4 border-end"><%= transaction.institution_name %></p>
           <p class="col-4"><%= transaction.date %></p>
-          <% unless transaction.uncategorized? %>
-            <p class="col-4 border-start"><%= transaction.budget_item_category %></p>
-          <% end %>
         </div>
       </div>
     </div>
