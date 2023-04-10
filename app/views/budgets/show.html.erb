@@ -1,14 +1,21 @@
-<h2><%= @budget.title %></h2>
+<section>
+  <h1><%= @budget.title %></h1>
 
-<div id="budget_total">
-  <%= render 'total', budget: @budget %>
-</div>
+  <div id="budget_total">
+    <%= render 'total', budget: @budget %>
+  </div>
+</section>
 
 <%= link_to "back", statements_path %>
 
-<div id="budget_item_form">
-  <%= render 'budget_items/new_form', budget_item: @new_budget_item %>
-</div>
+<section class="row">
+  <div id="budget_item_form" class="col-6">
+    <%= render 'budget_items/new_form', budget_item: @new_budget_item %>
+  </div>
+  <div class="col-6">
+    <%= pie_chart budget_to_chart(@budget), prefix: '$' %>
+  </div>
+</section>
 
 <% if @budget.items.persisted.any? %>
   <section id="budget_items">

@@ -1,5 +1,5 @@
 <%= simple_form_for budget_item, url: budget_items_url(budget_item.budget) do |f| %>
   <%= f.input :category %>
   <%= f.input :amount, as: :integer %>
-  <%= f.button :submit %>
+  <%= f.button :submit, class: 'btn btn-primary' %>
 <% end %>

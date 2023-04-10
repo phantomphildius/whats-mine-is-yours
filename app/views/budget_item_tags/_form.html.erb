@@ -1,5 +1,5 @@
 <%= simple_form_for @tag do |f| %>
   <%= f.input :name %>
-  <%= f.submit 'add tag' %>
+  <%= f.submit 'add tag', class: 'btn btn-outline-secondary btn-sm' %>
 <% end %>
 <%= link_to "cancel", @budget %>
