@@ -1,12 +1,13 @@
 class BudgetItemsController < ApplicationController
   def create
     @budget = current_user.budgets.find_sole_by(id: params.fetch(:budget_id))
-    budget_item =
+    budget_item_service =
       BudgetItemInserterService.new(
-        budget: budget,
+        budget: @budget,
         budget_item_params: budget_item_params
       )
-    if budget_item.insert
+    if budget_item_service.insert
+      @budget_item = budget_item_service.budget_item
       @new_budget_item = @budget.items.new
     else
       flash[:error] = "could not create budget item #{budget_item.errors}"

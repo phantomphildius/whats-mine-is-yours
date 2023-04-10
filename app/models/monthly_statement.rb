@@ -10,7 +10,7 @@ class MonthlyStatement < ApplicationRecord
     )
   end
 
-  # move this to a helper or presenter
+  #TODO move this to a helper or presenter
 
   def categorized_totals
     _categorized_totals.each_with_object({}) do |(key, value), obj|
@@ -20,7 +20,6 @@ class MonthlyStatement < ApplicationRecord
   end
 
   def monthly_budget_utlization_by_category
-    # binding.pry
     _categorized_totals
       .except(nil)
       .each_with_object({}) do |(key, value), obj|

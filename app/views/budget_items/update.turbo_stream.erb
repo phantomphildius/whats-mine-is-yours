@@ -1,5 +1,6 @@
 <%= turbo_stream.update "total_budget" do %>
   <%= render "budgets/total", budget: @budget %>
 <% end %>
+<%= turbo_stream.update "budget_breakdown", partial: 'budgets/breakdown', locals: { budget: @budget } %>
 
 <%= turbo_stream.replace @item_for_update, @item_for_update %>
