@@ -1,5 +1,5 @@
-<section class="row card">
-  <ul class="row gy-2">
+<section class="row">
+  <ul class="list-group gap-3">
     <%= render partial: 'transaction',
       collection: monthly_statement.transactions,
       locals: { statement: monthly_statement } %>
