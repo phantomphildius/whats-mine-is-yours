@@ -38,7 +38,8 @@ gem 'devise'
 gem 'simple_form'
 gem 'money-rails'
 gem 'normalize_attributes'
-gem "chartkick"
+gem 'chartkick'
+gem 'delayed'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
