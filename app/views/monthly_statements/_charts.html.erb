@@ -1,15 +1,15 @@
 <section class="row">
   <div class="row">
     <div class="col">
-      <%= area_chart monthly_statement.daily_spend_over_a_month, prefix: '$' %>
+      <%= area_chart monthly_statement_chart_path(monthly_statement, :progress), prefix: '$' %>
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <%= pie_chart monthly_statement.categorized_totals, prefix: '$' %>
+      <%= pie_chart monthly_statement_chart_path(monthly_statement, :donut), prefix: '$' %>
     </div>
     <div class="col">
-      <%= bar_chart monthly_statement.monthly_budget_utlization_by_category, suffix: '%', precision: 3 %>
+      <%= bar_chart monthly_statement_chart_path(monthly_statement, :bar), suffix: '%', precision: 3 %>
     </div>
   </div>
 <section>
