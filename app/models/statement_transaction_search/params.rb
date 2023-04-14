@@ -4,6 +4,10 @@ module StatementTransactionSearch
       @params = params
     end
 
+    def page
+      params.fetch(:page, 1)
+    end
+
     private
 
     attr_reader :params

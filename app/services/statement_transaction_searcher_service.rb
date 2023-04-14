@@ -7,10 +7,11 @@ class StatementTransactionSearcherService
   attr_reader :transactions
 
   def execute
-    @transactions = monthly_statement.transactions
+    @transactions = monthly_statement.transactions.order(:date).page(page)
   end
 
   private
 
   attr_reader :monthly_statement, :search_criteria
+  delegate :page, to: :search_criteria
 end

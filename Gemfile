@@ -40,6 +40,7 @@ gem 'money-rails'
 gem 'normalize_attributes'
 gem 'chartkick'
 gem 'delayed'
+gem 'kaminari'
 
 # Use Sass to process CSS
 # gem "sassc-rails"
