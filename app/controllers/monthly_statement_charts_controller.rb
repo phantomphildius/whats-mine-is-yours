@@ -2,6 +2,7 @@ class MonthlyStatementChartsController < ApplicationController
   def show
     presenter =
       MonthlyStatementChartsPresenter.new(monthly_statement, params[:id])
+
     render json: presenter.build_chart, status: :ok
   end
 
