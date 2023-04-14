@@ -1,15 +1,3 @@
-<nav class="nav">
-<% if @current_budget.present? %>
-  <li class="nav-item">
-    <%= link_to "Budget", @current_budget, class: 'nav-link' %>
-  </li>
-<% else %>
-  <li class="nav-item">
-    <%= link_to "Create a Budget", new_budget_path, class: 'nav-link' %>
-  </li>
-<% end %>
-</nav>
-
 <h1>Monthly statements</h1>
 
 <section class="row gy-3 mt-4" id="statements">

@@ -18,11 +18,14 @@
           </div>
       </div>
     </div>
-    <div>
-      <div id="budget_item_<%= item.id %>_tags">
-        <h6 class="text-muted">Tags</h6>
-        <%= render item.tags %>
-        <%= render "budget_items/new_tag_link", item: item %>
+    <div class="row">
+      <h6 class="text-muted">Tags</h6>
+        <div id="budget_item_<%= item.id %>_tags">
+          <%= render item.tags %>
+        </div>
+        <div class="col-4">
+          <%= render "budget_items/new_tag_link", item: item %>
+        </div>
       </div>
     </div>
   </div>

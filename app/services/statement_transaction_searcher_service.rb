@@ -13,5 +13,6 @@ class StatementTransactionSearcherService
   private
 
   attr_reader :monthly_statement, :search_criteria
+
   delegate :page, to: :search_criteria
 end

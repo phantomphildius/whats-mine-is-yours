@@ -11,11 +11,6 @@
   </div>
 </section>
 
-<%= simple_form_for :statement_transaction_search, url: statement_transaction_searches_path do |f| %>
-  <%= f.hidden_field :monthly_statement_id, value: @monthly_statement.id %>
-  <%= f.submit 'Search' %>
-<% end %>
-
 <%= turbo_frame_tag :statement_transaction_list, src: statement_transaction_searches_path(monthly_statement_id: @monthly_statement.id), loading: :lazy do %>
   <%= render 'statement_transaction_list_loader' %>
 <% end %>
