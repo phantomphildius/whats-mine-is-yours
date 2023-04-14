@@ -1,0 +1,5 @@
+<%= turbo_frame_tag :statement_transaction_list do %>
+    <%= render 'monthly_statements/statement_transaction_list',
+        monthly_statement: @monthly_statement,
+        transactions: @statement_search.transactions %>
+<% end %>

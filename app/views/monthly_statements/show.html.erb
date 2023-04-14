@@ -16,8 +16,6 @@
   <%= f.submit 'Search' %>
 <% end %>
 
-<section>
-  <%= turbo_frame_tag 'statement_transaction_list' do%>
-    <%= render "statement_transaction_list", monthly_statement: @monthly_statement %>
-  <% end %>
-</section>
+<%= turbo_frame_tag :statement_transaction_list, src: statement_transaction_searches_path(monthly_statement_id: @monthly_statement.id), loading: :lazy do %>
+  <%= render 'statement_transaction_list_loader' %>
+<% end %>

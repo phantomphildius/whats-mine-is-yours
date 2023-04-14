@@ -1,7 +1,7 @@
 <section class="row">
   <ul class="list-group gap-3">
-    <%= render partial: 'transaction',
-      collection: monthly_statement.transactions,
+    <%= render partial: 'monthly_statements/transaction',
+      collection: transactions,
       locals: { statement: monthly_statement } %>
   </ul>
 </section>
